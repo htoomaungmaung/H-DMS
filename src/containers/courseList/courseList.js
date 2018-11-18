@@ -62,7 +62,14 @@ class CourseList extends Component {
             />
             <Grid container spacing={24} style={{ padding: 24 }}>
               {this.state.courses.map(currentCourse => (
-                <Grid item xs={12} sm={6} lg={4} xl={3}>
+                <Grid
+                  key={currentCourse.sys.id}
+                  item
+                  xs={12}
+                  sm={6}
+                  lg={4}
+                  xl={3}
+                >
                   <Course course={currentCourse} />
                 </Grid>
               ))}

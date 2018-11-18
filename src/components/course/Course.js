@@ -22,6 +22,7 @@ const Course = props => {
             </Typography>
             <Typography component="p">
               {props.course.fields.description}
+              {props.key}
             </Typography>
           </CardContent>
           <CardActions>

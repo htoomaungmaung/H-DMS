@@ -6,6 +6,7 @@
   "main": "src/index.js",
   "dependencies": {
     "@material-ui/core": "3.5.1",
+    "contentful": "7.0.5",
     "react": "16.5.2",
     "react-dom": "16.5.2",
     "react-scripts": "2.0.3"

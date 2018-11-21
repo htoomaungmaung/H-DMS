@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import AsyncComponent from "./hoc/asyncComponent/AsyncComponent";
 
-import MiniDrawer from "./hoc/drawer/minidrawer/MiniDrawer";
+import Layout from "./hoc/layout/Layout";
 
 const asyncCourseList = AsyncComponent(() => {
   return import("./containers/courseList/courseList");
@@ -19,7 +19,7 @@ class App extends Component {
 
     return (
       <div>
-        <MiniDrawer>{routes}</MiniDrawer>
+        <Layout>{routes}</Layout>
       </div>
     );
   }

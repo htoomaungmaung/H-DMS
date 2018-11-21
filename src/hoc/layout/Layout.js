@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "../../components/navigation/appBar/AppBar";
 import Drawer from "../../components/navigation/drawer/Drawer";
+
 const styles = theme => ({
   root: {
     display: "flex"
@@ -23,7 +24,8 @@ const styles = theme => ({
 class Layout extends Component {
   state = {
     toolbarTitle: "",
-    open: false
+    open: false,
+    selectedIndex: 0
   };
   handleDrawerOpen = () => {
     this.setState({ open: true });
@@ -31,8 +33,11 @@ class Layout extends Component {
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
-  updateToolbarTitle = title => {
+  updateToolbarTitle = (event, title) => {
     this.setState({ toolbarTitle: title });
+  };
+  handleListItemClick = (event, index) => {
+    this.setState({ selectedIndex: index });
   };
   render() {
     const { classes } = this.props;
@@ -45,7 +50,14 @@ class Layout extends Component {
           drawerOpen={this.handleDrawerOpen}
           drawerClose={this.handleDrawerClose}
         />
-        <Drawer />
+        <Drawer
+          drawerState={this.state.open}
+          drawerOpen={this.handleDrawerOpen}
+          drawerClose={this.handleDrawerClose}
+          updateToolbarTitle={this.updateToolbarTitle}
+          listItemClick={this.handleListItemClick}
+          selectedIndex={this.state.selectedIndex}
+        />
         <main className={classes.content}>
           <div className={classes.toolbar} />
           {this.props.children}

@@ -7,12 +7,15 @@ import Layout from "./hoc/layout/Layout";
 const asyncCourseList = AsyncComponent(() => {
   return import("./containers/courseList/courseList");
 });
+const asyncHome = AsyncComponent(() => {
+  return import("./containers/home/home");
+});
 class App extends Component {
   render() {
     let routes = (
       <Switch>
         <Route path="/course" component={asyncCourseList} />
-        <Route path="/" exact component={asyncCourseList} />
+        <Route path="/" exact component={asyncHome} />
         <Redirect to="/" />
       </Switch>
     );

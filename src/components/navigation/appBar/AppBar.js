@@ -7,7 +7,6 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
 const drawerWidth = 240;
 const styles = theme => ({

@@ -17,46 +17,22 @@ class Home extends Component {
     return (
       <Paper className={classes.root} elevation={1}>
         <Typography variant="h5" component="h3">
-          This is hobby project.
+          This is hobby project. Experimenting with React.
         </Typography>
         <Typography component="p">
           Items that will include in this project
-          <p>
-            <input type="checkbox" checked /> React
-          </p>
-          <p>
-            <input type="checkbox" checked /> Router
-          </p>
-          <p>
-            <input type="checkbox" checked /> Material-UI
-          </p>
-          <p>
-            <input type="checkbox" checked /> ContentFul API
-          </p>
-          <p>
-            <input type="checkbox" /> Redux
-          </p>
-          <p>
-            <input type="checkbox" /> Redux Thunk
-          </p>
-          <p>
-            <input type="checkbox" /> Axios
-          </p>
-          <p>
-            <input type="checkbox" /> Firebase
-          </p>
-          <p>
-            <input type="checkbox" /> Authentication
-          </p>
-          <p>
-            <input type="checkbox" /> Oauth
-          </p>
-          <p>
-            <input type="checkbox" /> Auth0
-          </p>
-          <p>
-            <input type="checkbox" /> Web Socket
-          </p>
+          <input type="checkbox" checked /> React
+          <input type="checkbox" checked /> Router
+          <input type="checkbox" checked /> Material-UI
+          <input type="checkbox" checked /> ContentFul API
+          <input type="checkbox" /> Redux
+          <input type="checkbox" /> Redux Thunk
+          <input type="checkbox" /> Axios
+          <input type="checkbox" /> Firebase
+          <input type="checkbox" /> Authentication
+          <input type="checkbox" /> Oauth
+          <input type="checkbox" /> Auth0
+          <input type="checkbox" /> Web Socket
         </Typography>
       </Paper>
     );

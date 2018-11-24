@@ -10,11 +10,15 @@ const asyncCourseList = AsyncComponent(() => {
 const asyncHome = AsyncComponent(() => {
   return import("./containers/home/home");
 });
+const asyncAuth = AsyncComponent(() => {
+  return import("./containers/auth/auth");
+});
 class App extends Component {
   render() {
     let routes = (
       <Switch>
         <Route path="/course" component={asyncCourseList} />
+        <Route path="/auth" component={asyncAuth} />
         <Route path="/" exact component={asyncHome} />
         <Redirect to="/" />
       </Switch>

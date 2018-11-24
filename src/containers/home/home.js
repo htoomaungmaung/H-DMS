@@ -21,10 +21,10 @@ class Home extends Component {
         </Typography>
         <Typography component="p">
           Items that will include in this project
-          <input type="checkbox" checked /> React
-          <input type="checkbox" checked /> Router
-          <input type="checkbox" checked /> Material-UI
-          <input type="checkbox" checked /> ContentFul API
+          <input type="checkbox" defaultChecked /> React
+          <input type="checkbox" defaultChecked /> Router
+          <input type="checkbox" defaultChecked /> Material-UI
+          <input type="checkbox" defaultChecked /> ContentFul API
           <input type="checkbox" /> Redux
           <input type="checkbox" /> Redux Thunk
           <input type="checkbox" /> Axios

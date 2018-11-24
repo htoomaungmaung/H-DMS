@@ -25,7 +25,7 @@ class Layout extends Component {
   state = {
     toolbarTitle: "",
     open: false,
-    selectedIndex: 0
+    selectedIndex: 1
   };
   handleDrawerOpen = () => {
     this.setState({ open: true });

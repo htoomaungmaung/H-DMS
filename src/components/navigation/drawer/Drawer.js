@@ -14,6 +14,7 @@ import DashBoard from "@material-ui/icons/Dashboard";
 import ClassIcon from "@material-ui/icons/Class";
 import SettingIcon from "@material-ui/icons/Settings";
 import CloutOffIcon from "@material-ui/icons/CloudOff";
+import CloudQueueIcon from "@material-ui/icons/CloudQueue";
 import { Link } from "react-router-dom";
 const drawerWidth = 240;
 const styles = theme => ({
@@ -50,6 +51,7 @@ const styles = theme => ({
 });
 
 const CustomDrawer = props => {
+  console.log(props.selectedIndex);
   const { classes, theme } = props;
   return (
     <Drawer
@@ -67,6 +69,21 @@ const CustomDrawer = props => {
       open={props.drawerState}
     >
       <div className={classes.toolbar}>
+        <ListItem
+          button
+          component={Link}
+          to="/auth"
+          selected={props.selectedIndex === 0}
+          onClick={event => (
+            props.listItemClick(event, 0),
+            props.updateToolbarTitle(event, "Connect Me To System")
+          )}
+        >
+          <ListItemIcon>
+            <CloudQueueIcon />
+          </ListItemIcon>
+          <ListItemText primary="Connect" />
+        </ListItem>
         <IconButton onClick={props.drawerClose}>
           {theme.direction === "rtl" ? (
             <ChevronRightIcon />
@@ -81,9 +98,9 @@ const CustomDrawer = props => {
           button
           component={Link}
           to="/"
-          selected={props.selectedIndex === 0}
+          selected={props.selectedIndex === 1}
           onClick={event => (
-            props.listItemClick(event, 0),
+            props.listItemClick(event, 1),
             props.updateToolbarTitle(event, "Digital Management System")
           )}
         >
@@ -96,9 +113,9 @@ const CustomDrawer = props => {
           button
           component={Link}
           to="/course"
-          selected={props.selectedIndex === 1}
+          selected={props.selectedIndex === 2}
           onClick={event => (
-            props.listItemClick(event, 1),
+            props.listItemClick(event, 2),
             props.updateToolbarTitle(event, "Course")
           )}
         >
@@ -114,9 +131,9 @@ const CustomDrawer = props => {
           button
           component={Link}
           to="/"
-          selected={props.selectedIndex === 2}
+          selected={props.selectedIndex === 3}
           onClick={event => (
-            props.listItemClick(event, 2),
+            props.listItemClick(event, 3),
             props.updateToolbarTitle(event, "Settings")
           )}
         >
@@ -129,16 +146,16 @@ const CustomDrawer = props => {
           button
           component={Link}
           to="/"
-          selected={props.selectedIndex === 3}
+          selected={props.selectedIndex === 4}
           onClick={event => (
-            props.listItemClick(event, 0),
+            props.listItemClick(event, 1),
             props.updateToolbarTitle(event, "Digital Management System")
           )}
         >
           <ListItemIcon>
             <CloutOffIcon />
           </ListItemIcon>
-          <ListItemText primary="Logout" />
+          <ListItemText primary="Disconnect" />
         </ListItem>
       </List>
     </Drawer>

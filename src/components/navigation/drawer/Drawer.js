@@ -130,7 +130,7 @@ const CustomDrawer = props => {
         <ListItem
           button
           component={Link}
-          to="/"
+          to="/settings"
           selected={props.selectedIndex === 3}
           onClick={event => (
             props.listItemClick(event, 3),

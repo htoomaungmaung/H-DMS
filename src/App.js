@@ -8,10 +8,13 @@ const asyncCourseList = AsyncComponent(() => {
   return import("./containers/courseList/courseList");
 });
 const asyncHome = AsyncComponent(() => {
-  return import("./containers/home/home");
+  return import("./containers/system/home");
 });
 const asyncAuth = AsyncComponent(() => {
   return import("./containers/auth/auth");
+});
+const asyncSettings = AsyncComponent(() => {
+  return import("./containers/system/settings");
 });
 class App extends Component {
   render() {
@@ -19,6 +22,7 @@ class App extends Component {
       <Switch>
         <Route path="/course" component={asyncCourseList} />
         <Route path="/auth" component={asyncAuth} />
+        <Route path="/settings" component={asyncSettings} />
         <Route path="/" exact component={asyncHome} />
         <Redirect to="/" />
       </Switch>

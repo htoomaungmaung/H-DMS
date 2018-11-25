@@ -12,6 +12,12 @@ Change our way of using and managing digital data. Make it efficient on time man
 
 > react js created with create-react-app template
 
+25 Nov 2018
+
+> added redux
+> let the page title and active tab updated by redux store
+> when new container created, need to trigger updatePage action to make it work
+
 ## Security
 
 > Start with authentication method provided from contentful and firebase.

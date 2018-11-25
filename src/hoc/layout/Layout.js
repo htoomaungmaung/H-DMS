@@ -23,21 +23,13 @@ const styles = theme => ({
 
 class Layout extends Component {
   state = {
-    toolbarTitle: "",
-    open: false,
-    selectedIndex: 1
+    open: false
   };
   handleDrawerOpen = () => {
     this.setState({ open: true });
   };
   handleDrawerClose = () => {
     this.setState({ open: false });
-  };
-  updateToolbarTitle = (event, title) => {
-    this.setState({ toolbarTitle: title });
-  };
-  handleListItemClick = (event, index) => {
-    this.setState({ selectedIndex: index });
   };
   render() {
     const { classes } = this.props;
@@ -54,8 +46,6 @@ class Layout extends Component {
           drawerState={this.state.open}
           drawerOpen={this.handleDrawerOpen}
           drawerClose={this.handleDrawerClose}
-          updateToolbarTitle={this.updateToolbarTitle}
-          listItemClick={this.handleListItemClick}
           currentPage={this.props.currentPage}
         />
         <main className={classes.content}>

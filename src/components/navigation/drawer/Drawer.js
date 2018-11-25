@@ -73,10 +73,6 @@ const CustomDrawer = props => {
           component={Link}
           to="/auth"
           selected={props.currentPage === "auth"}
-          onClick={event => (
-            props.listItemClick(event, 0),
-            props.updateToolbarTitle(event, "Connect Me To System")
-          )}
         >
           <ListItemIcon>
             <CloudQueueIcon />
@@ -98,10 +94,6 @@ const CustomDrawer = props => {
           component={Link}
           to="/"
           selected={props.currentPage === "home"}
-          onClick={event => (
-            props.listItemClick(event, 1),
-            props.updateToolbarTitle(event, "Digital Management System")
-          )}
         >
           <ListItemIcon>
             <DashBoard />
@@ -113,10 +105,6 @@ const CustomDrawer = props => {
           component={Link}
           to="/course"
           selected={props.currentPage === "course"}
-          onClick={event => (
-            props.listItemClick(event, 2),
-            props.updateToolbarTitle(event, "Course")
-          )}
         >
           <ListItemIcon>
             <ClassIcon />
@@ -131,10 +119,6 @@ const CustomDrawer = props => {
           component={Link}
           to="/settings"
           selected={props.currentPage === "settings"}
-          onClick={event => (
-            props.listItemClick(event, 3),
-            props.updateToolbarTitle(event, "Settings")
-          )}
         >
           <ListItemIcon>
             <SettingIcon />
@@ -146,10 +130,6 @@ const CustomDrawer = props => {
           component={Link}
           to="/"
           selected={props.currentPage === ""}
-          onClick={event => (
-            props.listItemClick(event, 1),
-            props.updateToolbarTitle(event, "Digital Management System")
-          )}
         >
           <ListItemIcon>
             <CloutOffIcon />

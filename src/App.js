@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import AsyncComponent from "./hoc/asyncComponent/AsyncComponent";
-
+import { connect } from "react-redux";
 import Layout from "./hoc/layout/Layout";
-
+import * as actions from "./store/actions/actions";
+import Logout from "./containers/auth/logout";
 const asyncCourseList = AsyncComponent(() => {
   return import("./containers/courseList/courseList");
 });
@@ -16,18 +17,32 @@ const asyncAuth = AsyncComponent(() => {
 const asyncSettings = AsyncComponent(() => {
   return import("./containers/system/settings");
 });
+
 class App extends Component {
+  componentDidMount() {
+    this.props.checkAuthState();
+  }
+
   render() {
     let routes = (
       <Switch>
-        <Route path="/course" component={asyncCourseList} />
         <Route path="/auth" component={asyncAuth} />
-        <Route path="/settings" component={asyncSettings} />
         <Route path="/" exact component={asyncHome} />
         <Redirect to="/" />
       </Switch>
     );
-
+    if (this.props.isAuthenticated) {
+      routes = (
+        <Switch>
+          <Route path="/course" component={asyncCourseList} />
+          <Route path="/auth" component={asyncAuth} />
+          <Route path="/settings" component={asyncSettings} />
+          <Route path="/logout" exact component={Logout} />
+          <Route path="/" exact component={asyncHome} />
+          <Redirect to="/" />
+        </Switch>
+      );
+    }
     return (
       <div>
         <Layout>{routes}</Layout>
@@ -35,5 +50,20 @@ class App extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token !== null
+  };
+};
 
-export default withRouter(App);
+const mapDispatchToProps = dispatch => {
+  return {
+    checkAuthState: () => dispatch(actions.authCheckState())
+  };
+};
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);

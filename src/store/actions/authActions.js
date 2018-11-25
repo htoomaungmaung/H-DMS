@@ -37,7 +37,7 @@ export const logout = () => {
  * attach with action type before dispatch  *
  *******************************************/
 
-export const resetAuthTimeout = expirationTime => {
+export const updateAuthTimeout = expirationTime => {
   return dispatch => {
     setTimeout(() => {
       dispatch(logout());
@@ -66,8 +66,26 @@ export const setAuthRedirectPath = path => {
 export const authCheckState = () => {
   return dispatch => {
     // get token from localStorage
-    // if token is null, dispatch logout action
+    const token = localStorage.getItem("token");
+    // if token is absent, dispatch logout action
+    if (!token) {
+      dispatch(logout());
+    }
     // else check the expirationDate
-    // if not expired yet, dispatch auth success action and reset the expiration timer
+    else {
+      const expirationDate = new Date(localStorage.getItem("expirationDate"));
+      if (expirationDate <= new Date()) {
+        dispatch(logout());
+      } else {
+        // if not expired yet, dispatch auth success action and reset the expiration timer
+        const userId = localStorage.getItem("userId");
+        dispatch(authSuccess(token, userId));
+        dispatch(
+          updateAuthTimeout(
+            (expirationDate.getTime() - new Date().getTime()) / 1000
+          )
+        );
+      }
+    }
   };
 };

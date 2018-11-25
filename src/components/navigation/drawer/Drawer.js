@@ -100,43 +100,44 @@ const CustomDrawer = props => {
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
-        <ListItem
-          button
-          component={Link}
-          to="/course"
-          selected={props.currentPage === "course"}
-        >
-          <ListItemIcon>
-            <ClassIcon />
-          </ListItemIcon>
-          <ListItemText primary="Course" />
-        </ListItem>
+        {props.isAuthenticated ? (
+          <ListItem
+            button
+            component={Link}
+            to="/course"
+            selected={props.currentPage === "course"}
+          >
+            <ListItemIcon>
+              <ClassIcon />
+            </ListItemIcon>
+            <ListItemText primary="Course" />
+          </ListItem>
+        ) : null}
       </List>
-      <Divider />
-      <List component="nav">
-        <ListItem
-          button
-          component={Link}
-          to="/settings"
-          selected={props.currentPage === "settings"}
-        >
-          <ListItemIcon>
-            <SettingIcon />
-          </ListItemIcon>
-          <ListItemText primary="Settings" />
-        </ListItem>
-        <ListItem
-          button
-          component={Link}
-          to="/"
-          selected={props.currentPage === ""}
-        >
-          <ListItemIcon>
-            <CloutOffIcon />
-          </ListItemIcon>
-          <ListItemText primary="Disconnect" />
-        </ListItem>
-      </List>
+      {props.isAuthenticated ? (
+        <div>
+          <Divider />
+          <List component="nav">
+            <ListItem
+              button
+              component={Link}
+              to="/settings"
+              selected={props.currentPage === "settings"}
+            >
+              <ListItemIcon>
+                <SettingIcon />
+              </ListItemIcon>
+              <ListItemText primary="Settings" />
+            </ListItem>
+            <ListItem button component={Link} to="/logout">
+              <ListItemIcon>
+                <CloutOffIcon />
+              </ListItemIcon>
+              <ListItemText primary="Disconnect" />
+            </ListItem>
+          </List>
+        </div>
+      ) : null}
     </Drawer>
   );
 };

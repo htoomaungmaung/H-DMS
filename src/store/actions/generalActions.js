@@ -1,9 +1,10 @@
 import * as actionTypes from "./actionTypes";
 
-export const updateTitle = pageTitle => {
+export const updateCurrentPage = (pageTitle, currentPage) => {
   return {
-    type: actionTypes.UPDATE_PAGE_TITLE,
-    pageTitle: pageTitle
+    type: actionTypes.UPDATE_PAGE,
+    pageTitle: pageTitle,
+    currentPage: currentPage
   };
 };
 
@@ -13,8 +14,8 @@ export const updateTitle = pageTitle => {
  * transform data or do action              *
  * attach with action type before dispatch  *
  *******************************************/
-export const updatePageTitle = pageTitle => {
+export const updatePage = (pageTitle, currentPage) => {
   return dispatch => {
-    dispatch(updateTitle(pageTitle));
+    dispatch(updateCurrentPage(pageTitle, currentPage));
   };
 };

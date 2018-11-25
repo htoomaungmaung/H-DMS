@@ -1,5 +1,5 @@
 // To make sure we have same action type in action creator and reducer
-export const UPDATE_PAGE_TITLE = "UPDATE_PAGE_TITLE";
+export const UPDATE_PAGE = "UPDATE_PAGE";
 
 export const AUTH_START = "AUTH_START";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";

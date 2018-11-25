@@ -3,7 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "../../components/navigation/appBar/AppBar";
 import Drawer from "../../components/navigation/drawer/Drawer";
-
+import { connect } from "react-redux";
 const styles = theme => ({
   root: {
     display: "flex"
@@ -45,7 +45,7 @@ class Layout extends Component {
       <div className={classes.root}>
         <CssBaseline />
         <AppBar
-          toolbarTitle={this.state.toolbarTitle}
+          toolbarTitle={this.props.pageTitle}
           drawerState={this.state.open}
           drawerOpen={this.handleDrawerOpen}
           drawerClose={this.handleDrawerClose}
@@ -56,7 +56,7 @@ class Layout extends Component {
           drawerClose={this.handleDrawerClose}
           updateToolbarTitle={this.updateToolbarTitle}
           listItemClick={this.handleListItemClick}
-          selectedIndex={this.state.selectedIndex}
+          currentPage={this.props.currentPage}
         />
         <main className={classes.content}>
           <div className={classes.toolbar} />
@@ -67,4 +67,11 @@ class Layout extends Component {
   }
 }
 
-export default withStyles(styles)(Layout);
+const mapStateToProps = state => {
+  return {
+    pageTitle: state.general.pageTitle,
+    currentPage: state.general.currentPage
+  };
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(Layout));

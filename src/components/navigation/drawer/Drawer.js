@@ -51,7 +51,6 @@ const styles = theme => ({
 });
 
 const CustomDrawer = props => {
-  console.log(props.selectedIndex);
   const { classes, theme } = props;
   return (
     <Drawer
@@ -73,7 +72,7 @@ const CustomDrawer = props => {
           button
           component={Link}
           to="/auth"
-          selected={props.selectedIndex === 0}
+          selected={props.currentPage === "auth"}
           onClick={event => (
             props.listItemClick(event, 0),
             props.updateToolbarTitle(event, "Connect Me To System")
@@ -98,7 +97,7 @@ const CustomDrawer = props => {
           button
           component={Link}
           to="/"
-          selected={props.selectedIndex === 1}
+          selected={props.currentPage === "home"}
           onClick={event => (
             props.listItemClick(event, 1),
             props.updateToolbarTitle(event, "Digital Management System")
@@ -113,7 +112,7 @@ const CustomDrawer = props => {
           button
           component={Link}
           to="/course"
-          selected={props.selectedIndex === 2}
+          selected={props.currentPage === "course"}
           onClick={event => (
             props.listItemClick(event, 2),
             props.updateToolbarTitle(event, "Course")
@@ -131,7 +130,7 @@ const CustomDrawer = props => {
           button
           component={Link}
           to="/settings"
-          selected={props.selectedIndex === 3}
+          selected={props.currentPage === "settings"}
           onClick={event => (
             props.listItemClick(event, 3),
             props.updateToolbarTitle(event, "Settings")
@@ -146,7 +145,7 @@ const CustomDrawer = props => {
           button
           component={Link}
           to="/"
-          selected={props.selectedIndex === 4}
+          selected={props.currentPage === ""}
           onClick={event => (
             props.listItemClick(event, 1),
             props.updateToolbarTitle(event, "Digital Management System")

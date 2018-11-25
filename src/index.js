@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
-
+import thunk from "redux-thunk";
 import authReducer from "./store/reducers/authReducer";
 import generalReducer from "./store/reducers/generalReducer";
 import App from "./App";
@@ -19,7 +19,10 @@ const rootReducer = combineReducers({
   general: generalReducer
 });
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware()));
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
 const rootElement = document.getElementById("root");
 
 const app = (

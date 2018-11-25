@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/actions";
 
 const styles = theme => ({
   root: {
@@ -12,6 +14,9 @@ const styles = theme => ({
 });
 
 class Home extends Component {
+  componentDidMount() {
+    this.props.onContainerLoad("Home Page", "home");
+  }
   render() {
     const { classes } = this.props;
     return (
@@ -25,8 +30,8 @@ class Home extends Component {
           <input type="checkbox" defaultChecked /> Router
           <input type="checkbox" defaultChecked /> Material-UI
           <input type="checkbox" defaultChecked /> ContentFul API
-          <input type="checkbox" /> Redux
-          <input type="checkbox" /> Redux Thunk
+          <input type="checkbox" defaultChecked /> Redux
+          <input type="checkbox" defaultChecked /> Redux Thunk
           <input type="checkbox" /> Axios
           <input type="checkbox" /> Firebase
           <input type="checkbox" /> Authentication
@@ -39,4 +44,16 @@ class Home extends Component {
   }
 }
 
-export default withStyles(styles)(Home);
+const mapStateToProps = state => {
+  return {};
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    onContainerLoad: (pageTitle, currentPage) =>
+      dispatch(actions.updatePage(pageTitle, currentPage))
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Home));

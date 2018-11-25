@@ -3,7 +3,8 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import * as contentful from "contentful";
 import Course from "../../components/course/Course";
-
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/actions";
 const SPACE_ID = "d9ek5fldp48h";
 const ACCESS_TOKEN =
   "807c3616b2ec5f2b0dd423562c42a4ae58707d26d639e27c24da5e1985597b36";
@@ -22,6 +23,10 @@ class CourseList extends Component {
   constructor() {
     super();
     this.getCourses();
+  }
+
+  componentDidMount() {
+    this.props.onContainerLoad("Course Lists", "course");
   }
 
   getCourses = () => {
@@ -82,4 +87,16 @@ class CourseList extends Component {
     );
   }
 }
-export default CourseList;
+const mapStateToProps = state => {
+  return {};
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    onContainerLoad: (pageTitle, currentPage) =>
+      dispatch(actions.updatePage(pageTitle, currentPage))
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CourseList);

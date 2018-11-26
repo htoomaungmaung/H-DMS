@@ -1,106 +1,116 @@
 import React from "react";
-import PropTypes from "prop-types";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import LockIcon from "@material-ui/icons/LockOutlined";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import withStyles from "@material-ui/core/styles/withStyles";
-import Switch from "@material-ui/core/Switch";
+import TextField from "@material-ui/core/TextField";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import NameIcon from "@material-ui/icons/SupervisorAccount";
+import LockIcon from "@material-ui/icons/Lock";
+import EmailIcon from "@material-ui/icons/Email";
 
-const styles = theme => ({
-  main: {
-    width: "auto",
-    display: "block", // Fix IE 11 issue.
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: 400,
-      marginLeft: "auto",
-      marginRight: "auto"
-    }
-  },
-  paper: {
-    marginTop: theme.spacing.unit * 8,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
-      .spacing.unit * 3}px`
-  },
-  avatar: {
-    margin: theme.spacing.unit,
-    backgroundColor: theme.palette.secondary.main
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing.unit
-  },
-  submit: {
-    marginTop: theme.spacing.unit * 3
-  }
-});
+const signInForm = props => {
+  const {
+    values: { name, email, password, confirmPassword },
+    errors,
+    touched,
+    handleSubmit,
+    handleChange,
+    isValid,
+    setFieldTouched
+  } = props;
 
-function signInForm(props) {
-  const { classes } = props;
+  const change = (name, e) => {
+    e.persist();
+    handleChange(e);
+    setFieldTouched(name, true, false);
+  };
 
   return (
-    <main className={classes.main}>
-      <CssBaseline />
-      <Paper className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          {props.isSignup ? "Sign up" : "Sign in"}
-        </Typography>
-        <form className={classes.form}>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
-          </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input
-              name="password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-          </FormControl>
-
-          <FormControlLabel
-            control={
-              <Switch
-                checked={props.isSignup}
-                onChange={props.toggleSignup}
-                value=""
-              />
-            }
-            label="Toggle between Sign in/Sign up"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            {props.isSignup ? "Sign up" : "Sign in"}
-          </Button>
-        </form>
-      </Paper>
-    </main>
+    <form>
+      {props.isSignUp ? (
+        <TextField
+          id="name"
+          name="name"
+          helperText={touched.name ? errors.name : ""}
+          error={touched.name && Boolean(errors.name)}
+          label="Name"
+          value={name}
+          onChange={change.bind(null, "name")}
+          fullWidth
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <NameIcon />
+              </InputAdornment>
+            )
+          }}
+        />
+      ) : null}
+      <TextField
+        id="email"
+        name="email"
+        helperText={touched.email ? errors.email : ""}
+        error={touched.email && Boolean(errors.email)}
+        label="Email"
+        fullWidth
+        value={email}
+        onChange={change.bind(null, "email")}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <EmailIcon />
+            </InputAdornment>
+          )
+        }}
+      />
+      <TextField
+        id="password"
+        name="password"
+        helperText={touched.password ? errors.password : ""}
+        error={touched.password && Boolean(errors.password)}
+        label="Password"
+        fullWidth
+        type="password"
+        value={password}
+        onChange={change.bind(null, "password")}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <LockIcon />
+            </InputAdornment>
+          )
+        }}
+      />
+      {props.isSignUp ? (
+        <TextField
+          id="confirmPassword"
+          name="confirmPassword"
+          helperText={touched.confirmPassword ? errors.confirmPassword : ""}
+          error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+          label="Confirm Password"
+          fullWidth
+          type="password"
+          value={confirmPassword}
+          onChange={change.bind(null, "confirmPassword")}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <LockIcon />
+              </InputAdornment>
+            )
+          }}
+        />
+      ) : null}
+      <Button
+        onClick={handleSubmit}
+        fullWidth
+        variant="contained"
+        color="primary"
+        disabled={!isValid}
+        style={{ marginTop: "10px" }}
+      >
+        Submit
+      </Button>
+    </form>
   );
-}
-
-signInForm.propTypes = {
-  classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(signInForm);
+export default signInForm;

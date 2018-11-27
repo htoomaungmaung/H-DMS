@@ -56,6 +56,7 @@ class auth extends Component {
 
   handleChange = event => {
     this.setState({ isSignUp: event.target.checked });
+    this.forceUpdate();
   };
 
   render() {
@@ -86,10 +87,12 @@ class auth extends Component {
       });
     }
 
-    let values = { name: "", email: "", confirmPassword: "", password: "" };
-    if (!this.state.isSignUp) {
-      values = { name: "", password: "" };
-    }
+    const formValues = {
+      name: "",
+      email: "",
+      confirmPassword: "",
+      password: ""
+    };
 
     return (
       <main className={classes.main}>
@@ -121,7 +124,7 @@ class auth extends Component {
                 {...props}
               />
             )}
-            initialValues={values}
+            initialValues={formValues}
             validationSchema={validationSchema}
           />
         </Paper>

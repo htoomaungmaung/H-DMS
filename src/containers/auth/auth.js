@@ -52,15 +52,19 @@ class auth extends Component {
   }
 
   state = {
-    email: "",
-    password: "",
-    name: "",
     isSignUp: false
   };
 
-  handleChange = event => {
+  toggleSwitch = event => {
     this.setState({ isSignUp: event.target.checked });
     this.forceUpdate();
+  };
+
+  submitForm = formValues => {
+    console.log(formValues.email);
+    console.log(formValues.name);
+    console.log(formValues.password);
+    console.log("ready to submit");
   };
 
   render() {
@@ -113,7 +117,7 @@ class auth extends Component {
             Sign in
             <Switch
               checked={this.state.isSignUp}
-              onChange={this.handleChange}
+              onChange={this.toggleSwitch}
               value=""
               color="primary"
             />
@@ -123,7 +127,7 @@ class auth extends Component {
             isSignUp={this.state.isSignUp}
             onSubmit={(values, { setSubmitting }) => {
               setSubmitting(false);
-              alert(JSON.stringify(values));
+              this.submitForm(values);
             }}
             render={props => (
               <SignInForm

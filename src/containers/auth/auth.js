@@ -11,6 +11,7 @@ import LockIcon from "@material-ui/icons/LockOutlined";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch";
+import { Redirect } from "react-router-dom";
 
 const styles = theme => ({
   main: {
@@ -51,6 +52,9 @@ class auth extends Component {
   }
 
   state = {
+    email: "",
+    password: "",
+    name: "",
     isSignUp: false
   };
 
@@ -93,9 +97,13 @@ class auth extends Component {
       confirmPassword: "",
       password: ""
     };
-
+    let authRedirect = null;
+    if (this.props.isAuthenticated) {
+      authRedirect = <Redirect to={this.props.authRedirectPath} />;
+    }
     return (
       <main className={classes.main}>
+        {authRedirect}
         <CssBaseline />
         <Paper elevation={1} className={classes.paper}>
           <Avatar className={classes.avatar}>

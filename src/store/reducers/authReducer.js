@@ -4,6 +4,7 @@ import { updateObject } from "../../shared/utility";
 const initialState = {
   token: null,
   userId: null,
+  name: null,
   error: null,
   loading: false,
   authRedirectPath: "/"
@@ -14,9 +15,11 @@ const authStart = (state, action) => {
 };
 
 const authSuccess = (state, action) => {
+  console.log("auth success!");
   return updateObject(state, {
     token: action.idToken,
     userId: action.userId,
+    name: action.name,
     error: null,
     loading: false
   });
@@ -30,7 +33,7 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
-  return updateObject(state, { token: null, userId: null });
+  return updateObject(state, { token: null, userId: null, name: null });
 };
 
 const setAuthRedirectPath = (state, action) => {
@@ -39,7 +42,7 @@ const setAuthRedirectPath = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.AUTH_START:
+    case actionTypes.AUTH_START_CLEAR_DATA:
       return authStart(state, action);
     case actionTypes.AUTH_SUCCESS:
       return authSuccess(state, action);
@@ -47,8 +50,6 @@ const reducer = (state = initialState, action) => {
       return authFail(state, action);
     case actionTypes.AUTH_LOGOUT:
       return authLogout(state, action);
-    case actionTypes.SET_AUTH_REDIRECT_PATH:
-      return setAuthRedirectPath(state, action);
     default:
       return state;
   }

@@ -2,15 +2,16 @@ import * as actionTypes from "./actionTypes";
 
 export const authStart = () => {
   return {
-    type: actionTypes.AUTH_START
+    type: actionTypes.AUTH_START_CLEAR_DATA
   };
 };
 
-export const authSuccess = (token, userId) => {
+export const authSuccess = (token, userId, name) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
-    userId: userId
+    userId: userId,
+    name: name
   };
 };
 
@@ -25,6 +26,7 @@ export const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("expirationDate");
   localStorage.removeItem("userId");
+  localStorage.removeItem("name");
   return {
     type: actionTypes.AUTH_LOGOUT
   };
@@ -45,21 +47,23 @@ export const updateAuthTimeout = expirationTime => {
   };
 };
 
-export const auth = (email, password, isSignup) => {
+export const auth = (name, email, password, isSignup) => {
   return dispatch => {
+    localStorage.setItem("token", "respons");
+    localStorage.setItem("expirationDate", expirationDate);
+    localStorage.setItem("userId", "respons");
+    localStorage.setItem("name", "name");
+    console.log("Auth start!");
+    const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+    dispatch(authStart());
+    dispatch(authSuccess("token", "userid", "name"));
+    dispatch(updateAuthTimeout(100000000));
     // start the auth process
     // verify password or sign up according to isSignup boolean
     // set the expiration timer
     // save token, expiration and userId to localStorage
     // dispatch auth success
     // if any error, dispatch auth fail
-  };
-};
-
-export const setAuthRedirectPath = path => {
-  return {
-    type: actionTypes.SET_AUTH_REDIRECT_PATH,
-    path: path
   };
 };
 
@@ -79,8 +83,10 @@ export const authCheckState = () => {
       } else {
         // if not expired yet, dispatch auth success action and reset the expiration timer
         const userId = localStorage.getItem("userId");
-        dispatch(authSuccess(token, userId));
+        const name = localStorage.getItem("name");
+        dispatch(authSuccess(token, userId, name));
         dispatch(
+          // TODO: need to renew the token if the user is active on the website
           updateAuthTimeout(
             (expirationDate.getTime() - new Date().getTime()) / 1000
           )

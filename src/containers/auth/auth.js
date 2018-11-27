@@ -12,7 +12,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch";
 import { Redirect } from "react-router-dom";
-
+// TODO: add error handling and loading spiner
 const styles = theme => ({
   main: {
     width: "auto",
@@ -52,26 +52,27 @@ class auth extends Component {
   }
 
   state = {
-    isSignUp: false
+    isSignup: false
   };
 
   toggleSwitch = event => {
-    this.setState({ isSignUp: event.target.checked });
-    this.forceUpdate();
+    this.setState({ isSignup: event.target.checked });
   };
 
   submitForm = formValues => {
-    console.log(formValues.email);
-    console.log(formValues.name);
-    console.log(formValues.password);
-    console.log("ready to submit");
+    this.props.onAuth(
+      formValues.name,
+      formValues.email,
+      formValues.password,
+      this.state.isSignup
+    );
   };
 
   render() {
     const { classes } = this.props;
 
     let validationSchema;
-    if (this.state.isSignUp) {
+    if (this.state.isSignup) {
       validationSchema = Yup.object({
         name: Yup.string("Enter a name").required("Name is required"),
         email: Yup.string("Enter your email")
@@ -116,7 +117,7 @@ class auth extends Component {
           <Typography component="h1" variant="h5">
             Sign in
             <Switch
-              checked={this.state.isSignUp}
+              checked={this.state.isSignup}
               onChange={this.toggleSwitch}
               value=""
               color="primary"
@@ -124,14 +125,14 @@ class auth extends Component {
             Sign up
           </Typography>
           <Formik
-            isSignUp={this.state.isSignUp}
+            isSignup={this.state.isSignup}
             onSubmit={(values, { setSubmitting }) => {
               setSubmitting(false);
               this.submitForm(values);
             }}
             render={props => (
               <SignInForm
-                isSignUp={this.state.isSignUp}
+                isSignup={this.state.isSignup}
                 className={classes.form}
                 {...props}
               />
@@ -155,7 +156,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onContainerLoad: (pageTitle, currentPage) =>
-      dispatch(actions.updatePage(pageTitle, currentPage))
+      dispatch(actions.updatePage(pageTitle, currentPage)),
+    onAuth: (name, email, password, isSignup) =>
+      dispatch(actions.auth(name, email, password, isSignup))
   };
 };
 export default connect(

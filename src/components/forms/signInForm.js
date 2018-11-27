@@ -25,7 +25,7 @@ const signInForm = props => {
 
   return (
     <form>
-      {props.isSignUp ? (
+      {props.isSignup ? (
         <TextField
           id="name"
           name="name"
@@ -79,7 +79,7 @@ const signInForm = props => {
           )
         }}
       />
-      {props.isSignUp ? (
+      {props.isSignup ? (
         <TextField
           id="confirmPassword"
           name="confirmPassword"

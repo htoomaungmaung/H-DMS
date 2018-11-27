@@ -1,7 +1,7 @@
 // To make sure we have same action type in action creator and reducer
 export const UPDATE_PAGE = "UPDATE_PAGE";
 
-export const AUTH_START = "AUTH_START";
+export const AUTH_START_CLEAR_DATA = "AUTH_START_CLEAR_DATA";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";

@@ -9,8 +9,8 @@ import * as actions from "../../store/actions/actions";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import LockIcon from "@material-ui/icons/LockOutlined";
 import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
-import Switch from "@material-ui/core/Switch";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 import { Redirect } from "react-router-dom";
 // TODO: add error handling and loading spiner
 const styles = theme => ({
@@ -33,6 +33,10 @@ const styles = theme => ({
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
       .spacing.unit * 3}px`
   },
+  tab: {
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
+      .spacing.unit * 3}px`
+  },
   avatar: {
     margin: theme.spacing.unit,
     backgroundColor: theme.palette.secondary.main
@@ -52,11 +56,16 @@ class auth extends Component {
   }
 
   state = {
-    isSignup: false
+    isSignup: false,
+    currentTab: 0
   };
 
   toggleSwitch = event => {
     this.setState({ isSignup: event.target.checked });
+  };
+
+  handleTabChange = (event, value) => {
+    this.setState({ currentTab: value, isSignup: !!value });
   };
 
   submitForm = formValues => {
@@ -114,16 +123,18 @@ class auth extends Component {
           <Avatar className={classes.avatar}>
             <LockIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
-            SignIn
-            <Switch
-              checked={this.state.isSignup}
-              onChange={this.toggleSwitch}
-              value=""
-              color="primary"
-            />
-            SignUp
-          </Typography>
+          <Tabs
+            className={classes.tab}
+            value={this.state.currentTab}
+            indicatorColor="primary"
+            textColor="primary"
+            onChange={this.handleTabChange}
+          >
+            <Tab label="Sign In">
+              <LockIcon />
+            </Tab>
+            <Tab label="Sign Up" />
+          </Tabs>
           <Formik
             isSignup={this.state.isSignup}
             onSubmit={(values, { setSubmitting }) => {

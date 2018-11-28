@@ -15,6 +15,7 @@ import SettingIcon from "@material-ui/icons/Settings";
 import CloutOffIcon from "@material-ui/icons/CloudOff";
 import CloudQueueIcon from "@material-ui/icons/CloudQueue";
 import SvgIcon from "@material-ui/core/SvgIcon";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 import { Link } from "react-router-dom";
 const drawerWidth = 240;
 const styles = theme => ({
@@ -74,17 +75,23 @@ const CustomDrawer = props => {
       open={props.drawerState}
     >
       <div className={classes.toolbar}>
-        <ListItem
-          button
-          component={Link}
-          to="/auth"
-          selected={props.currentPage === "auth"}
-        >
+        {!props.isAuthenticated ? (
+          <ListItem
+            button
+            component={Link}
+            to="/auth"
+            selected={props.currentPage === "auth"}
+          >
+            <ListItemIcon>
+              <CloudQueueIcon />
+            </ListItemIcon>
+            <ListItemText primary="Connect" />
+          </ListItem>
+        ) : (
           <ListItemIcon>
-            <CloudQueueIcon />
+            <AccountCircle />
           </ListItemIcon>
-          <ListItemText primary="Connect" />
-        </ListItem>
+        )}
         <IconButton onClick={props.drawerClose}>
           {theme.direction === "rtl" ? (
             <ChevronRightIcon />

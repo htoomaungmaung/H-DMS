@@ -10,11 +10,11 @@ import List from "@material-ui/core/List";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import DashBoard from "@material-ui/icons/Dashboard";
 import ClassIcon from "@material-ui/icons/Class";
 import SettingIcon from "@material-ui/icons/Settings";
 import CloutOffIcon from "@material-ui/icons/CloudOff";
 import CloudQueueIcon from "@material-ui/icons/CloudQueue";
+import SvgIcon from "@material-ui/core/SvgIcon";
 import { Link } from "react-router-dom";
 const drawerWidth = 240;
 const styles = theme => ({
@@ -49,7 +49,13 @@ const styles = theme => ({
     ...theme.mixins.toolbar
   }
 });
-
+function HomeIcon(props) {
+  return (
+    <SvgIcon {...props}>
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+    </SvgIcon>
+  );
+}
 const CustomDrawer = props => {
   const { classes, theme } = props;
   return (
@@ -96,7 +102,7 @@ const CustomDrawer = props => {
           selected={props.currentPage === "home"}
         >
           <ListItemIcon>
-            <DashBoard />
+            <HomeIcon />
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>

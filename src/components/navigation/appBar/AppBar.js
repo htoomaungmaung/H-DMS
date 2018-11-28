@@ -60,12 +60,7 @@ const CustomAppBar = props => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography
-          onClick={props.drawerClose}
-          variant="h6"
-          color="inherit"
-          noWrap
-        >
+        <Typography variant="h6" color="inherit" noWrap>
           {props.toolbarTitle.trim() === ""
             ? "Digital Management System"
             : props.toolbarTitle}

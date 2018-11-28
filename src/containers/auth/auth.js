@@ -115,14 +115,14 @@ class auth extends Component {
             <LockIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            SignIn
             <Switch
               checked={this.state.isSignup}
               onChange={this.toggleSwitch}
               value=""
               color="primary"
             />
-            Sign up
+            SignUp
           </Typography>
           <Formik
             isSignup={this.state.isSignup}

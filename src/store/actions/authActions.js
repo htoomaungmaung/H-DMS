@@ -52,11 +52,11 @@ export const auth = (name, email, password, isSignup) => {
     localStorage.setItem("token", "respons");
     localStorage.setItem("expirationDate", expirationDate);
     localStorage.setItem("userId", "respons");
-    localStorage.setItem("name", "name");
+    localStorage.setItem("name", "profile name");
     console.log("Auth start!");
     const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
     dispatch(authStart());
-    dispatch(authSuccess("token", "userid", "name"));
+    dispatch(authSuccess("token", "userid", "Profile"));
     dispatch(updateAuthTimeout(100000000));
     // start the auth process
     // verify password or sign up according to isSignup boolean

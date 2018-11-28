@@ -130,9 +130,7 @@ class auth extends Component {
             textColor="primary"
             onChange={this.handleTabChange}
           >
-            <Tab label="Sign In">
-              <LockIcon />
-            </Tab>
+            <Tab label="Sign In" />
             <Tab label="Sign Up" />
           </Tabs>
           <Formik

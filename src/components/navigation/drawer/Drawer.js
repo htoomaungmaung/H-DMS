@@ -47,6 +47,7 @@ const styles = theme => ({
     alignItems: "center",
     justifyContent: "flex-end",
     padding: "0 8px",
+    dense: true,
     ...theme.mixins.toolbar
   }
 });
@@ -88,9 +89,12 @@ const CustomDrawer = props => {
             <ListItemText primary="Connect" />
           </ListItem>
         ) : (
-          <ListItemIcon>
-            <AccountCircle />
-          </ListItemIcon>
+          <ListItem>
+            <ListItemIcon>
+              <AccountCircle />
+            </ListItemIcon>
+            <ListItemText primary={props.profileName} />
+          </ListItem>
         )}
         <IconButton onClick={props.drawerClose}>
           {theme.direction === "rtl" ? (

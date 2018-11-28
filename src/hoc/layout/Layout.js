@@ -49,6 +49,7 @@ class Layout extends Component {
           drawerClose={this.handleDrawerClose}
           currentPage={this.props.currentPage}
           isAuthenticated={this.props.isAuthenticated}
+          profileName={this.props.profileName}
         />
         <main className={classes.content}>
           <div className={classes.toolbar} />
@@ -63,7 +64,8 @@ const mapStateToProps = state => {
   return {
     pageTitle: state.general.pageTitle,
     currentPage: state.general.currentPage,
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: state.auth.token !== null,
+    profileName: state.auth.name
   };
 };
 

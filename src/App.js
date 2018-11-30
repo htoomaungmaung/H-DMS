@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import Layout from "./hoc/layout/Layout";
 import * as actions from "./store/actions/actions";
 import Logout from "./containers/auth/logout";
+import CustomizedSnackbar from "./shared/snackBar/CustomizedSnackbars";
 const asyncCourseList = AsyncComponent(() => {
   return import("./containers/courseList/courseList");
 });
@@ -46,13 +47,20 @@ class App extends Component {
     return (
       <div>
         <Layout>{routes}</Layout>
+        {this.props.snackBarType != "" && this.props.snackBarMessage != "" ? (
+          <CustomizedSnackbar variant={this.props.snackBarType}>
+            {this.props.snackBarMessage}
+          </CustomizedSnackbar>
+        ) : null}
       </div>
     );
   }
 }
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: state.auth.token !== null,
+    snackBarType: state.auth.snackBarType,
+    snackBarMessage: state.auth.snackBarMessage
   };
 };
 

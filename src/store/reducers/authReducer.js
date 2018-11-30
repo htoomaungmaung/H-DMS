@@ -7,13 +7,20 @@ const initialState = {
   name: null,
   error: null,
   loading: false,
+  snackBarType: "",
+  snackBarMessage: "",
   authRedirectPath: "/"
 };
 
 const authStart = (state, action) => {
   return updateObject(state, { error: null, loading: true });
 };
-
+const snackBarMessageUpdate = (state, action) => {
+  return updateObject(state, {
+    snackBarType: action.snackBarType,
+    snackBarMessage: action.snackBarMessage
+  });
+};
 const authSuccess = (state, action) => {
   console.log("auth success!");
   return updateObject(state, {
@@ -21,7 +28,9 @@ const authSuccess = (state, action) => {
     userId: action.userId,
     name: action.name,
     error: null,
-    loading: false
+    loading: false,
+    snackBarType: "success",
+    snackBarMessage: "Successfully Sign in!"
   });
 };
 

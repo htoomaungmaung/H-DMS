@@ -1,7 +1,6 @@
 import { updateObject } from "../../shared/utility";
 import * as actionTypes from "../actions/actionTypes";
 
-// for demo purpose, will store the selected tab value in redux store
 const initialState = {
   pageTitle: "",
   currentPage: ""
